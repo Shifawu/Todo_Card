@@ -1,32 +1,56 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
 body {
-  background: #f4f4f5;
+  background: linear-gradient(135deg, #f9fafb, #f1f5f9);
 }
 
+/* Layout */
 .container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 24px;
 }
 
+/* Card */
 .card {
-  background: white;
-  max-width: 450px;
+  background: #ffffff;
+  max-width: 480px;
   width: 100%;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 26px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid #f1f5f9;
 }
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+}
+
+/* Priority Accent */
+.priority-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  border-radius: 20px 0 0 20px;
+}
+
+.priority-bar.high { background: #ef4444; }
+.priority-bar.medium { background: #f59e0b; }
+.priority-bar.low { background: #10b981; }
 
 /* Header */
 .header {
@@ -37,36 +61,94 @@ body {
 
 h2 {
   font-size: 20px;
+  font-weight: 600;
+  color: #111827;
 }
 
 p {
-  color: #555;
   font-size: 14px;
+  color: #6b7280;
+  margin-top: 6px;
+  line-height: 1.5;
 }
 
-/* Badges */
+/* Checkbox */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #111827;
+  cursor: pointer;
+}
+
+/* Dropdown */
+select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+select:hover {
+  border-color: #9ca3af;
+}
+
+select:focus {
+  border-color: #111827;
+  background: white;
+}
+
+/* Meta */
 .meta {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.badge {
-  padding: 4px 10px;
-  border-radius: 999px;
+/* Priority Badge */
+#priority {
   font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-weight: 500;
 }
 
-.high {
+.high-priority {
   background: #fee2e2;
   color: #dc2626;
 }
 
-.progress {
+.medium-priority {
   background: #fef3c7;
   color: #b45309;
 }
 
-.done {
+.low-priority {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Status Badge */
+#status {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.status-pending {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-done {
   background: #dcfce7;
   color: #15803d;
 }
@@ -74,28 +156,52 @@ p {
 /* Dates */
 .dates {
   font-size: 14px;
-  color: #555;
+  color: #6b7280;
 }
 
 #time-remaining {
-  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Overdue State */
+.overdue-card {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+}
+
+#overdue {
+  color: #ef4444;
+  font-weight: 600;
   margin-top: 4px;
-  font-weight: bold;
-  color: #111;
 }
 
-/* Tags */
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tags span {
-  background: #e5e7eb;
-  padding: 4px 8px;
+/* Expand Button */
+#expand-btn {
+  align-self: flex-start;
+  background: #f3f4f6;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#expand-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Collapsible */
+#collapsible {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+  padding-top: 6px;
+}
+
+.collapsed {
+  display: none;
 }
 
 /* Buttons */
@@ -106,34 +212,84 @@ p {
 }
 
 button {
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 9px 16px;
+  border-radius: 12px;
   border: none;
+  font-size: 14px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-button:first-child {
+button:active {
+  transform: scale(0.96);
+}
+
+/* Edit */
+#edit-btn {
+  background: #f3f4f6;
+}
+
+#edit-btn:hover {
   background: #e5e7eb;
 }
 
-button:last-child {
-  background: black;
+/* Delete */
+#delete-btn {
+  background: #111827;
   color: white;
 }
 
-button:focus {
-  outline: 2px solid black;
+#delete-btn:hover {
+  background: #000;
 }
 
-/* Completed */
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+input, textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* Save/Cancel */
+#save-btn {
+  background: #111827;
+  color: white;
+}
+
+#cancel-btn {
+  background: #e5e7eb;
+}
+
+/* Done state */
 .completed {
   text-decoration: line-through;
-  color: gray;
+  color: #9ca3af;
 }
 
-/* Responsive */
+/* Hidden */
+.hidden {
+  display: none;
+}
+
+/* Mobile */
 @media (max-width: 480px) {
   .card {
-    padding: 16px;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
   }
 }
